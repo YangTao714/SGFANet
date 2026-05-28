@@ -1,0 +1,16 @@
+Model Name      : CATANet
+Upscale factor  : x4
+Device          : CUDA
+Profile mode    : IMG  # IMG=读图片并统一裁剪; RAND=随机张量
+Input Shape(LR) : 1,3,256,256
+Image Source    : 2x.png
+Superpixels     : DISABLED
+Params (sum)    : 535,195
+thop Params     : 535.195K  (535,195.00)
+thop MACs       : 46.767G  (46,766,776,320.00)  ~FLOPs≈2*MACs
+Latency avg     : 218.176 ms
+Latency min     : 206.086 ms
+Latency p50     : 207.576 ms
+Latency p90     : 261.136 ms
+Runs/Warmup     : 100/20
+Peak Memory     : 2.18 GB

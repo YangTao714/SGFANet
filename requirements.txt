@@ -1,0 +1,15 @@
+addict
+future
+lmdb
+numpy>=1.17
+opencv-python
+Pillow
+pyyaml
+requests
+scikit-image
+scipy
+
+torch>=2.2
+torchvision
+tqdm
+yapf

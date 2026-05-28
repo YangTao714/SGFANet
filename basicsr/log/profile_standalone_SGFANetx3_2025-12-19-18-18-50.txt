@@ -1,0 +1,16 @@
+Model Name      : SGFANet
+Upscale factor  : x3
+Device          : CUDA
+Input Shape(LR) : 1,3,64,64
+Image Source    : 2x.png (same directory)
+Superpixels     : ENABLED
+SP segments     : [234]
+Params (sum)    : 708,009
+thop Params     : 708.009K  (708,009.00)
+thop MACs       : 3.166G  (3,165,899,136.00)  ~FLOPs≈2*MACs
+Latency avg     : 12.040 ms
+Latency min     : 11.810 ms
+Latency p50     : 12.019 ms
+Latency p90     : 12.221 ms
+Runs/Warmup     : 100/20
+Peak Memory     : 49.76 MB

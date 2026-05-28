@@ -1,0 +1,26 @@
+{
+  "model_name": "CATANet",
+  "device": "cuda",
+  "half": false,
+  "input_shape": [
+    1,
+    3,
+    128,
+    128
+  ],
+  "params_python": 524636,
+  "thop": {
+    "ok": true,
+    "params": 524012,
+    "macs": 11648532864
+  },
+  "latency_ms": {
+    "avg": 38.606770270562265,
+    "min": 37.91932397871278,
+    "p50": 38.46789899398573,
+    "p90": 39.30165199562907
+  },
+  "runs": 100,
+  "warmup": 20,
+  "peak_memory_bytes": 408802304
+}

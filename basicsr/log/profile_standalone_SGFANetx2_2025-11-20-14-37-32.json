@@ -1,0 +1,35 @@
+{
+  "model_name": "SGFANet",
+  "upscale": 2,
+  "device": "cuda",
+  "half": false,
+  "input_shape_lr": [
+    1,
+    3,
+    64,
+    64
+  ],
+  "pre_upsample_input": false,
+  "image_name": "2x.png",
+  "superpixels": {
+    "enabled": true,
+    "segments_per_image": [
+      28
+    ]
+  },
+  "params_python": 672954,
+  "thop": {
+    "ok": true,
+    "params": 672954,
+    "macs": 2958014976
+  },
+  "latency_ms": {
+    "avg": 20.484290397726,
+    "min": 14.09352000337094,
+    "p50": 14.322948001790792,
+    "p90": 49.12945197429508
+  },
+  "runs": 100,
+  "warmup": 20,
+  "peak_memory_bytes": 40041472
+}

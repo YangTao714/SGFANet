@@ -1,0 +1,15 @@
+Model Name      : CATANet
+Upscale factor  : x2
+Device          : CUDA
+Input Shape(LR) : 1,3,128,128
+Superpixels     : ENABLED (precomputed once)
+SP segments     : [1]
+Params (sum)    : 469,724
+thop Params     : 469.100K  (469,100.00)
+thop MACs       : 7.853G  (7,853,015,424.00)  ~FLOPs≈2*MACs
+Latency avg     : 19.180 ms
+Latency min     : 18.906 ms
+Latency p50     : 19.088 ms
+Latency p90     : 19.649 ms
+Runs/Warmup     : 100/20
+Peak Memory     : 387.40 MB

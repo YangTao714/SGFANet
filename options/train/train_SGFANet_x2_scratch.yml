@@ -1,0 +1,148 @@
+# general settings for image SR training
+name: train_SGFANet_x2_scratch
+model_type: SGFANetModel
+scale: 2
+num_gpu: auto
+manual_seed: 3407
+# dataset and data loader settings
+datasets:
+  train:
+    task: SR
+    name: DIV2K
+    type: PairedImageDataset
+    dataroot_gt: datasets/DIV2K/DIV2K_HR
+    dataroot_lq: datasets/DIV2K/DIV2K_LR_bicubic/X2
+    filename_tmpl: '{}x2'
+    io_backend:
+      type: disk
+
+    gt_size: 128
+    use_hflip: true
+    use_rot: true
+
+    use_superpixels: true
+    sp_cfg:
+      avg_size: 5
+      max_sp: 180
+      adaptive_max_sp: true
+      ref_patch_size: 64
+      area_pow: 0.9
+      compactness: 10.5
+      sigma: 1.0
+      enforce_connectivity: true
+      edge_weight: 0.0    # 0 表示只用 Y；比如设成 0.5 或 1.0 打开“边缘增强”
+
+    # data loader
+    use_shuffle: true
+    num_worker_per_gpu: 8
+    batch_size_per_gpu: 16
+    dataset_enlarge_ratio: 100
+    prefetch_mode: 'cuda'
+    pin_memory: true
+
+  val_0:
+    name: Urban100
+    type: PairedImageDataset
+    dataroot_gt: datasets/Urban100/HR
+    dataroot_lq: datasets/Urban100/LR_bicubic/X2
+    filename_tmpl: '{}x2'
+    io_backend:
+      type: disk
+
+  val_1:
+    name: Manga109
+    type: PairedImageDataset
+    dataroot_gt: datasets/Manga109/HR
+    dataroot_lq: datasets/Manga109/LR_bicubic/X2
+    filename_tmpl: '{}x2'
+    io_backend:
+      type: disk
+
+  val_2: # the 3rd test dataset
+    name: B100
+    type: PairedImageDataset
+    dataroot_gt: datasets/B100/HR
+    dataroot_lq: datasets/B100/LR_bicubic/X2
+    filename_tmpl: '{}x2'
+    io_backend:
+      type: disk
+
+  val_3: # the 4th test dataset
+    name: Set5
+    type: PairedImageDataset
+    dataroot_gt: datasets/Set5/HR
+    dataroot_lq: datasets/Set5/LR_bicubic/X2
+    filename_tmpl: '{}x2'
+    io_backend:
+      type: disk
+
+  val_4: # the 5th test dataset
+    name: Set14
+    type: PairedImageDataset
+    dataroot_gt: datasets/Set14/HR
+    dataroot_lq: datasets/Set14/LR_bicubic/X2
+    filename_tmpl: '{}x2'
+    io_backend:
+      type: disk
+
+
+# network structures
+network_g:
+  type: SGFANet
+  upscale: 2
+
+# path
+path:
+  pretrain_network_g: ~
+  strict_load_g: true
+  resume_state: ~
+
+# training settings
+train:
+  optim_g:
+    type: Adam
+    lr: !!float 2e-4
+    weight_decay: 0
+    betas: [0.9, 0.99]
+
+  scheduler:
+    type: MultiStepLR
+    milestones: [300000, 500000, 650000, 700000, 750000]
+    gamma: 0.5
+  total_iter: 800000
+
+  # losses
+  pixel_opt:
+    type: L1Loss
+    loss_weight: 1.0
+    reduction: mean
+val:
+  val_freq: !!float 300
+  save_img: false
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr_pt
+      crop_border: 2
+      test_y_channel: true
+
+    ssim:
+      type: calculate_ssim_pt
+      crop_border: 2
+      test_y_channel: true
+
+
+
+# logging settings
+logger:
+  print_freq: 200
+  save_checkpoint_freq: !!float 300
+  use_tb_logger: true
+  wandb:
+    project: ~
+    resume_id: ~
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29500

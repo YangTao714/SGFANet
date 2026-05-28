@@ -1,0 +1,40 @@
+{
+  "model_name": "CATANet",
+  "upscale": 3,
+  "device": "cuda",
+  "half": false,
+  "profile_mode": "IMG",
+  "input_shape_lr": [
+    1,
+    3,
+    64,
+    64
+  ],
+  "pre_upsample_input": false,
+  "image_name": "2x.png",
+  "superpixels": {
+    "enabled": false,
+    "precomputed_once": false
+  },
+  "params_python": 549635,
+  "thop": {
+    "ok": true,
+    "params": 549635,
+    "macs": 2288885760
+  },
+  "latency_ms": {
+    "avg": 15.989407730521634,
+    "min": 15.791761979926378,
+    "p50": 15.95307100797072,
+    "p90": 16.181094048079103
+  },
+  "runs": 100,
+  "warmup": 20,
+  "peak_memory_bytes": 218938880,
+  "sr_shape": [
+    1,
+    3,
+    192,
+    192
+  ]
+}
